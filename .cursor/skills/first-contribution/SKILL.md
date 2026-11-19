@@ -22,9 +22,10 @@ Steps 1–6 and 8 are judgment. Step 7 is the only scripted check. The script do
    - Find the definition under `src/_skimage2`, re-exports under `src/skimage` and `src/skimage2`, and the matching files in both `tests/skimage` and `tests/skimage2`.
    - Example: `src/_skimage2/filters/thresholding.py`, with tests in `tests/skimage/filters/test_thresholding.py` and `tests/skimage2/filters/test_thresholding.py`.
 
-3. Write a regression test and demonstrate the expected failure.
+3. Write a test first and show the result before changing behaviour.
    - Cover the ticket's acceptance criteria in both test trees. Use local fixtures or synthetic arrays.
-   - Run the new tests with the documented `spin test` command from [AGENTS.md](../../../AGENTS.md) and [testing.md](../../../doc/source/development/testing.md), and show that they fail for the behaviour the ticket describes.
+   - Bug fixes must demonstrate a regression test failing for the expected reason before the fix. Run the new tests with the documented `spin test` command from [AGENTS.md](../../../AGENTS.md) and [testing.md](../../../doc/source/development/testing.md), and show that they fail for the behaviour the ticket describes.
+   - Behavior-preserving characterization/documentation tasks should demonstrate the existing behavior with passing tests. Run those tests with the same `spin test` command and show that they pass. Do not manufacture a failure or change behavior to satisfy the workflow.
    - Passing only those test files does not collect docstring examples. `python -m pytest` on test files does not pass `--doctest-plus`. `spin test` adds `--doctest-plus` ([.spin/cmds.py](../../../.spin/cmds.py), default on) but still collects only the paths after `--`.
 
 4. Stop and ask before changing a public signature.
