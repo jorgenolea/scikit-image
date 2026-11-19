@@ -1,0 +1,7 @@
+---
+description: SYNTH Acme dependency and network policies
+alwaysApply: true
+---
+
+- SYNTH Acme policy: do not add a runtime dependency without explicit platform approval. Explain the need and request approval first.
+- SYNTH Acme policy: unit tests must not access the network or download remote data. Use local fixtures, synthetic arrays, or mocks.

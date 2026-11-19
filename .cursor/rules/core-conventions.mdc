@@ -1,0 +1,8 @@
+---
+description: Core library conventions
+alwaysApply: true
+---
+
+- Use relative imports inside the library.
+- Use NumPy dtype objects such as np.uint8 instead of dtype strings.
+- Refer to array dimensions as plane, row, and column, not x, y, and z.

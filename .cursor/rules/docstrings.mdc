@@ -1,0 +1,26 @@
+---
+description: NumPy-style docstrings for public functions
+globs: src/skimage/**/*.py,src/_skimage2/**/*.py
+alwaysApply: false
+---
+
+- Public functions use NumPy-style docstrings.
+- Describe parameters and return values.
+- Document an image array parameter as `image : ndarray of shape (M, N)`.
+- Refer to `M` and `N` for those dimensions when the description needs them.
+
+```python
+def normalize(image):
+    """Scale image intensities to the unit interval.
+
+    Parameters
+    ----------
+    image : ndarray of shape (M, N)
+        Input image with M rows and N columns.
+
+    Returns
+    -------
+    out : ndarray of shape (M, N)
+        Normalized image with the same M rows and N columns.
+    """
+```

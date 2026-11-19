@@ -1,0 +1,10 @@
+---
+description: Conventions for Python tests
+globs: **/tests/**/*.py
+alwaysApply: false
+---
+
+- Add tests to cover any new or changed behaviour.
+- Follow the existing layout under `tests/`. Inspect neighbouring test files to choose the matching directory, file name, and module import path.
+- Keep strict warning checks enabled. Do not disable or silence warnings solely to make a test pass.
+- SYNTH Acme policy: unit tests must not access the network or download remote `skimage.data` assets. Use local fixtures, synthetic arrays, or mocks instead.

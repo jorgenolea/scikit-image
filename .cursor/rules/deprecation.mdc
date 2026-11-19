@@ -1,0 +1,10 @@
+---
+description: Use when renaming, removing or changing defaults of public parameters or functions
+alwaysApply: false
+---
+
+- Follow a deprecation cycle for a breaking public API change: renaming keywords, reordering arguments, adding arguments, moving or renaming a function, or changing a default. A cycle is not required to add a function, add a keyword at the end of a signature, or fix incorrect behavior.
+- Announce applicable API changes with FutureWarning through warn_external so warnings point at the caller. Import it relatively from the appropriate _shared._warnings module; determine the leading dots from the current module's package depth.
+- When removing a parameter or function, use deprecate_parameter or deprecate_func where appropriate. Import them relatively from the appropriate _shared.utils module, using the correct package depth.
+- Add a removal reminder to `TODO.txt` in the section for the version where the removal happens.
+- Read the schedule in `doc/source/development/deprecations.md` for this change. Do not assume a fixed number of releases: warnings are typically kept for two releases, the worked example lands the change in N+3, and that schedule is not strict.
