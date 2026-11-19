@@ -340,6 +340,25 @@ def test_otsu_one_color_image_3d():
     assert threshold_otsu(img) == 1
 
 
+@pytest.mark.parametrize('kind', ['1d', 'zero-row'])
+def test_otsu_empty_image_without_histogram(kind):
+    """An empty image without a histogram raises ValueError."""
+    image = np.array([]) if kind == '1d' else np.empty((0, 5))
+    with pytest.raises(
+        ValueError, match="The parameter `image` cannot be an empty array"
+    ):
+        threshold_otsu(image)
+
+
+@pytest.mark.parametrize('kind', ['1d', 'zero-row'])
+def test_otsu_empty_image_uses_histogram(kind):
+    """An empty image is ignored when a valid histogram is provided."""
+    image = np.array([]) if kind == '1d' else np.empty((0, 5))
+    values = np.array([1, 2, 2, 3], dtype=np.uint8)
+    expected = threshold_otsu(values)
+    assert threshold_otsu(image, hist=np.bincount(values)) == expected
+
+
 def test_li_camera_image():
     image = util.img_as_ubyte(data.camera())
     threshold = threshold_li(image)

@@ -356,6 +356,11 @@ def threshold_otsu(image=None, nbins=256, *, hist=None):
         Upper threshold value. All pixels with an intensity higher than
         this value are assumed to be foreground.
 
+    Raises
+    ------
+    ValueError
+        If `image` is an empty array and `hist` is not provided.
+
     References
     ----------
     .. [1] Wikipedia, https://en.wikipedia.org/wiki/Otsu's_Method
@@ -379,11 +384,15 @@ def threshold_otsu(image=None, nbins=256, *, hist=None):
         )
 
     # Check if the image has more than one intensity value; if not, return that
-    # value
+    # value. An empty image has no pixel unless a histogram is supplied.
     if image is not None:
-        first_pixel = image.reshape(-1)[0]
-        if np.all(image == first_pixel):
-            return first_pixel
+        if image.size == 0:
+            if hist is None:
+                raise ValueError('The parameter `image` cannot be an empty array')
+        else:
+            first_pixel = image.reshape(-1)[0]
+            if np.all(image == first_pixel):
+                return first_pixel
 
     counts, bin_centers = _validate_image_histogram(image, hist, nbins)
 
